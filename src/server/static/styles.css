@@ -1,0 +1,36 @@
+.background-body-sac {
+	display: block;
+	background-image: url('PhoneBG.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 100%;
+	font-size: 18px;
+	background-position: 50% 50%;
+}
+
+.content-background {
+	margin-left: 44px;
+  	margin-top: 120px;
+}
+
+.form-content {
+	height: 40%;
+}
+
+.form-control.fit-to-background {
+	width: 65%;
+}
+
+.background-body-backoffice {
+	display: block;
+	background-color: #BCB5DA;
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 100%;
+	font-size: 18px;
+	background-position: 50% 50%;
+}
+
+.backoffice-background {
+	margin-left: 44px;
+}

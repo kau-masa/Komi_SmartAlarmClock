@@ -1,0 +1,480 @@
+[
+	{
+		"version": "1.0.0"
+	},
+	{
+		"uuid": "07718a3b-1c00-40a0-a849-d3040b1ed611",
+		"name": "FormatMessage",
+		"description": "",
+		"children": [
+			{
+				"id": "9881f0c7-ffe3-42f7-88a0-74d217dda022",
+				"activated": true,
+				"type": "sequence",
+				"metadata": {
+					"label": "",
+					"itemTemplate": "BTSequenceNode.qml"
+				},
+				"properties": {},
+				"children": [
+					{
+						"id": "809b5e46-dbe8-4111-8d53-bfe8a5238301",
+						"activated": true,
+						"type": "set",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTSetNode.qml"
+						},
+						"properties": {
+							"destination": "message",
+							"op": {
+								"value": "",
+								"type": "string"
+							}
+						},
+						"children": []
+					},
+					{
+						"id": "7fda3071-aed0-4208-9d7c-fce7d474fdfd",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "<b>Reminder:</b> You have a meeting at ",
+									"type": "string"
+								},
+								{
+									"key": "message2",
+									"value": "nextEvent.location",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "5fff5301-048a-4c9b-8a11-0a5e9e13be6e",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": " starting at ",
+									"type": "string"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "497d2cb6-c490-4ea1-85ad-7107bd181019",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": "nextEvent.start.time",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "7f7d2adc-244d-4ca2-870b-68cc153c63b7",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": ".<br><br>Getting there from ",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "e7064275-0568-4023-8cd4-684763323604",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": "origin",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "60f8b60b-bcb0-44e4-b911-f0bb50656786",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": " by ",
+									"type": "string"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "b6d3fd06-7b1a-4337-83c3-f05bb2c51580",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": "transportationMode",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "cfc52a20-5a5f-407f-8a8a-d46b2a92f038",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": " should take you about ",
+									"type": "string"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "5f3d7155-b6e6-4950-89e4-c348f1d4381a",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": "directions.routes[0].duration.text",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "be3d0c17-8b4e-463d-aae1-1ac9e7440f86",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": ".<br>You can check the itinerary by clicking on <a href=",
+									"type": "string"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "a394fc7a-c8f6-4cab-a2f2-3392ad648c1f",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": "directions.routes[0].map",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					},
+					{
+						"id": "4b25faca-8a09-4da8-b295-a95a5c016b60",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTActionNode.qml"
+						},
+						"properties": {
+							"name": "ConcatenateStrings",
+							"inputParams": [
+								{
+									"key": "message1",
+									"value": "message",
+									"type": "entityKnowledge"
+								},
+								{
+									"key": "message2",
+									"value": ">this link</a>.",
+									"type": "string"
+								},
+								{
+									"key": "separator",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"outputParams": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "entityKnowledge"
+								}
+							]
+						},
+						"children": []
+					}
+				]
+			}
+		]
+	}
+]

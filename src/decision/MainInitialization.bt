@@ -1,0 +1,191 @@
+[
+	{
+		"version": "1.0.0"
+	},
+	{
+		"uuid": "b4f1fbb6-b868-4de7-94b4-2874ff4795d1",
+		"name": "MainInitialization",
+		"description": "",
+		"children": [
+			{
+				"id": "6b0b08b2-4ee9-4f7b-9bda-d454cef3a10b",
+				"activated": true,
+				"type": "priority",
+				"metadata": {
+					"label": "",
+					"itemTemplate": "BTSelectorPrio.qml",
+					"position": {
+						"x": 5779.21533203125,
+						"y": 2410.28662109375,
+						"z": 0
+					}
+				},
+				"properties": {
+					"active": "true"
+				},
+				"children": [
+					{
+						"id": "8328b52d-3320-45ff-9017-bc8615166fb8",
+						"activated": true,
+						"type": "condition",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTConditionNode.qml",
+							"position": {
+								"x": -115.9229507446289,
+								"y": 107.30381774902344,
+								"z": 0
+							}
+						},
+						"properties": {
+							"op1": {
+								"value": "init",
+								"type": "entityKnowledge"
+							},
+							"op2": {
+								"value": "false",
+								"type": "boolean"
+							},
+							"op": "=="
+						},
+						"children": []
+					},
+					{
+						"id": "92848c24-5e45-4fe2-ae5e-9d6fbe944468",
+						"activated": true,
+						"type": "sequence",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTSequenceNode.qml",
+							"position": {
+								"x": 104.9737548828125,
+								"y": 107.30381774902344,
+								"z": 0
+							}
+						},
+						"properties": {},
+						"children": [
+							{
+								"id": "0b811b87-64d4-44e4-b2e6-cbd6c1ac9f8c",
+								"activated": true,
+								"type": "set",
+								"metadata": {
+									"label": "Initial time",
+									"itemTemplate": "BTSetNode.qml"
+								},
+								"properties": {
+									"destination": "simStartTime",
+									"op": {
+										"value": "time",
+										"type": "globalKnowledge"
+									}
+								},
+								"children": []
+							},
+							{
+								"id": "2685690e-26ea-43c6-870d-69fd8b0f50a1",
+								"activated": true,
+								"type": "embedded",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTEmbeddedNode.qml",
+									"position": {
+										"x": -171.70208740234375,
+										"y": 131.34091186523438,
+										"z": 0
+									}
+								},
+								"properties": {
+									"behavior": {
+										"value": "GetGoogleCredentials",
+										"type": "string"
+									},
+									"inputParams": []
+								},
+								"children": []
+							},
+							{
+								"id": "14e94aa1-a45d-4bc3-8162-f439b9fa93b2",
+								"activated": true,
+								"type": "embedded",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTEmbeddedNode.qml",
+									"position": {
+										"x": -61.41872787475586,
+										"y": 131.34091186523438,
+										"z": 0
+									}
+								},
+								"properties": {
+									"behavior": {
+										"value": "InitGoogleServices",
+										"type": "string"
+									},
+									"inputParams": []
+								},
+								"children": []
+							},
+							{
+								"id": "4a7444f3-dc0c-4e9a-8c2d-7c101e9e37cb",
+								"activated": true,
+								"type": "set",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTSetNode.qml"
+								},
+								"properties": {
+									"destination": "origin",
+									"op": {
+										"value": "homeLocation",
+										"type": "entityKnowledge"
+									}
+								},
+								"children": []
+							},
+							{
+								"id": "4f773f4f-e580-4b2d-902a-448810d0ea44",
+								"activated": true,
+								"type": "set",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTSetNode.qml"
+								},
+								"properties": {
+									"destination": "nextEvent",
+									"op": {
+										"value": "emptyEvent",
+										"type": "entityKnowledge"
+									}
+								},
+								"children": []
+							},
+							{
+								"id": "71851590-4a23-47ca-9347-378802b3decf",
+								"activated": true,
+								"type": "set",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTSetNode.qml",
+									"position": {
+										"x": 257.82257080078125,
+										"y": 131.34091186523438,
+										"z": 0
+									}
+								},
+								"properties": {
+									"destination": "init",
+									"op": {
+										"value": "false",
+										"type": "boolean"
+									}
+								},
+								"children": []
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

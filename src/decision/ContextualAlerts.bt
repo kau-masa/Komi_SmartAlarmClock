@@ -1,0 +1,100 @@
+[
+	{
+		"version": "1.0.0"
+	},
+	{
+		"uuid": "39137f02-c0bc-4487-be8e-84185f7ae07e",
+		"name": "ContextualAlerts",
+		"description": "",
+		"children": [
+			{
+				"id": "01f3d9d7-270d-4533-9cf2-b41a930e9a82",
+				"activated": true,
+				"type": "sequence",
+				"metadata": {
+					"label": "",
+					"itemTemplate": "BTSequenceNode.qml",
+					"position": {
+						"x": 4285.113527426074,
+						"y": 1707.3064008512736,
+						"z": 0
+					}
+				},
+				"properties": {},
+				"children": [
+					{
+						"id": "fb26b7ed-dd1a-4fde-a242-587d75bd066c",
+						"activated": true,
+						"type": "embedded",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTEmbeddedNode.qml",
+							"position": {
+								"x": -85.49891464853408,
+								"y": 170.71077112028138,
+								"z": 0
+							}
+						},
+						"properties": {
+							"behavior": {
+								"value": "MainInitialization",
+								"type": "string"
+							},
+							"inputParams": []
+						},
+						"children": []
+					},
+					{
+						"id": "2fdf2570-88ab-4ef3-96e3-9977f2e88ef1",
+						"activated": true,
+						"type": "until",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTUntilNode.qml",
+							"position": {
+								"x": 6.469174988604209,
+								"y": 171.5545150619064,
+								"z": 0
+							}
+						},
+						"properties": {
+							"op1": {
+								"value": "true",
+								"type": "boolean"
+							},
+							"op2": {
+								"value": "false",
+								"type": "boolean"
+							},
+							"op": "=="
+						},
+						"children": [
+							{
+								"id": "31c1d0a8-5d67-4dfe-957c-5b6bf2364a71",
+								"activated": true,
+								"type": "embedded",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTEmbeddedNode.qml",
+									"position": {
+										"x": 1.7908250113978283,
+										"y": 159.60548493809415,
+										"z": 0
+									}
+								},
+								"properties": {
+									"behavior": {
+										"value": "MainUpdate",
+										"type": "string"
+									},
+									"inputParams": []
+								},
+								"children": []
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

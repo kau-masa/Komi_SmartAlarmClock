@@ -1,0 +1,922 @@
+[
+	{
+		"version": "1.0.0"
+	},
+	{
+		"uuid": "02ce6f5d-8ff6-4207-8c2e-38b15a7eeab2",
+		"name": "AlertManager",
+		"description": "",
+		"children": [
+			{
+				"id": "72319715-aeb8-45c8-b16d-4f0540c0b09a",
+				"activated": true,
+				"type": "priority",
+				"metadata": {
+					"label": "",
+					"itemTemplate": "BTSelectorPrio.qml",
+					"position": {
+						"x": 6166,
+						"y": 2448,
+						"z": 0
+					}
+				},
+				"properties": {
+					"active": "true"
+				},
+				"children": [
+					{
+						"id": "52d55eb0-3472-4fe6-91b5-d1d18d52a030",
+						"activated": true,
+						"type": "condition",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTConditionNode.qml",
+							"position": {
+								"x": -261.3409118652344,
+								"y": 156.1326904296875,
+								"z": 0
+							}
+						},
+						"properties": {
+							"op1": {
+								"value": "alert.set",
+								"type": "entityKnowledge"
+							},
+							"op2": {
+								"value": "false",
+								"type": "boolean"
+							},
+							"op": "=="
+						},
+						"children": [
+							{
+								"id": "a660ced0-b413-4efa-a8f5-bbe691b590c2",
+								"activated": true,
+								"type": "sequence",
+								"metadata": {
+									"label": "Defining alert times",
+									"itemTemplate": "BTSequenceNode.qml",
+									"position": {
+										"x": -1.6999510526657104,
+										"y": 155.38003540039062,
+										"z": 0
+									}
+								},
+								"properties": {},
+								"children": [
+									{
+										"id": "407e9a79-457a-4ad5-b8d6-108a1cdcb0d7",
+										"activated": true,
+										"type": "action",
+										"metadata": {
+											"label": "30 minutes before leaving",
+											"itemTemplate": "BTActionNode.qml",
+											"position": {
+												"x": -147.15985107421875,
+												"y": 174.26010131835938,
+												"z": 0
+											}
+										},
+										"properties": {
+											"name": "Sum",
+											"inputParams": [
+												{
+													"key": "term1",
+													"value": "directions.routes[0].departure_time.value",
+													"type": "entityKnowledge"
+												},
+												{
+													"key": "term2",
+													"value": "-1800",
+													"type": "real"
+												}
+											],
+											"outputParams": [
+												{
+													"key": "result",
+													"value": "alert.time[0]",
+													"type": "entityKnowledge"
+												}
+											]
+										},
+										"children": []
+									},
+									{
+										"id": "1a54ea40-fff9-44a1-a311-b68607957d75",
+										"activated": true,
+										"type": "action",
+										"metadata": {
+											"label": "5 minutes before leaving",
+											"itemTemplate": "BTActionNode.qml",
+											"position": {
+												"x": 1.6200000047683716,
+												"y": 136.0800018310547,
+												"z": 0
+											}
+										},
+										"properties": {
+											"name": "Sum",
+											"inputParams": [
+												{
+													"key": "term1",
+													"value": "directions.routes[0].departure_time.value",
+													"type": "entityKnowledge"
+												},
+												{
+													"key": "term2",
+													"value": "-300",
+													"type": "real"
+												}
+											],
+											"outputParams": [
+												{
+													"key": "result",
+													"value": "alert.time[1]",
+													"type": "entityKnowledge"
+												}
+											]
+										},
+										"children": []
+									},
+									{
+										"id": "31348cbb-e3e2-494d-8927-b677b363ede3",
+										"activated": true,
+										"type": "action",
+										"metadata": {
+											"label": "10 minutes late",
+											"itemTemplate": "BTActionNode.qml",
+											"position": {
+												"x": 119.8800048828125,
+												"y": 168.47999572753906,
+												"z": 0
+											}
+										},
+										"properties": {
+											"name": "Sum",
+											"inputParams": [
+												{
+													"key": "term1",
+													"value": "directions.routes[0].departure_time.value",
+													"type": "entityKnowledge"
+												},
+												{
+													"key": "term2",
+													"value": "600",
+													"type": "real"
+												}
+											],
+											"outputParams": [
+												{
+													"key": "result",
+													"value": "alert.time[2]",
+													"type": "entityKnowledge"
+												}
+											]
+										},
+										"children": []
+									},
+									{
+										"id": "178e087a-2ef9-44b7-a455-6ed89a740340",
+										"activated": true,
+										"type": "embedded",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTEmbeddedNode.qml"
+										},
+										"properties": {
+											"behavior": {
+												"value": "FormatMessage",
+												"type": "string"
+											},
+											"inputParams": []
+										},
+										"children": []
+									},
+									{
+										"id": "d0fca77f-940d-442f-9d69-4dfc72ac1e9c",
+										"activated": true,
+										"type": "set",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTSetNode.qml",
+											"position": {
+												"x": 233.5009307861328,
+												"y": 136.34730529785156,
+												"z": 0
+											}
+										},
+										"properties": {
+											"destination": "alert.set",
+											"op": {
+												"value": "true",
+												"type": "boolean"
+											}
+										},
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "9438b52d-3320-45ff-9017-bc8615166fb8",
+						"activated": true,
+						"type": "condition",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTConditionNode.qml",
+							"position": {
+								"x": -115.9229507446289,
+								"y": 107.30381774902344,
+								"z": 0
+							}
+						},
+						"properties": {
+							"op1": {
+								"value": "left",
+								"type": "entityKnowledge"
+							},
+							"op2": {
+								"value": "false",
+								"type": "boolean"
+							},
+							"op": "=="
+						},
+						"children": [
+							{
+								"id": "10ebe886-7899-4b08-973e-015298e956f4",
+								"activated": true,
+								"type": "priority",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTSelectorPrio.qml",
+									"position": {
+										"x": 0.21977053582668304,
+										"y": 134.133056640625,
+										"z": 0
+									}
+								},
+								"properties": {
+									"active": "true"
+								},
+								"children": [
+									{
+										"id": "80f816bc-15f9-4f84-8250-149c097dccfb",
+										"activated": true,
+										"type": "condition",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTConditionNode.qml",
+											"position": {
+												"x": -174.92544555664062,
+												"y": 115.0634536743164,
+												"z": 0
+											}
+										},
+										"properties": {
+											"op1": {
+												"value": "time",
+												"type": "globalKnowledge"
+											},
+											"op2": {
+												"value": "alert.time[2]",
+												"type": "entityKnowledge"
+											},
+											"op": ">="
+										},
+										"children": [
+											{
+												"id": "81c15696-2476-45a0-b290-62fc1d6f6b20",
+												"activated": true,
+												"type": "sequence",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSequenceNode.qml",
+													"position": {
+														"x": -1.6940906047821045,
+														"y": 163.60357666015625,
+														"z": 0
+													}
+												},
+												"properties": {},
+												"children": [
+													{
+														"id": "565419fd-2a3e-41ca-b49f-ea97821190f9",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "play too late",
+															"itemTemplate": "BTActionNode.qml",
+															"position": {
+																"x": 82.36000061035156,
+																"y": 120.69999694824219,
+																"z": 0
+															}
+														},
+														"properties": {
+															"name": "Alert",
+															"inputParams": [
+																{
+																	"key": "sound",
+																	"value": "motus.wav",
+																	"type": "string"
+																},
+																{
+																	"key": "message",
+																	"value": "It's too late to get to your meeting in time...",
+																	"type": "string"
+																}
+															],
+															"outputParams": []
+														},
+														"children": []
+													},
+													{
+														"id": "37796f47-01cd-4e35-818b-1c5035fcac78",
+														"activated": true,
+														"type": "set",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTSetNode.qml"
+														},
+														"properties": {
+															"destination": "alert.snooze.0",
+															"op": {
+																"value": "false",
+																"type": "boolean"
+															}
+														},
+														"children": []
+													},
+													{
+														"id": "45c907e7-fa28-4806-8e89-66e60caabe54",
+														"activated": true,
+														"type": "set",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTSetNode.qml"
+														},
+														"properties": {
+															"destination": "alert.snooze.1",
+															"op": {
+																"value": "false",
+																"type": "boolean"
+															}
+														},
+														"children": []
+													},
+													{
+														"id": "545408fd-263e-41ca-b69f-ea87820190f9",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTActionNode.qml",
+															"position": {
+																"x": 82.36000061035156,
+																"y": 120.69999694824219,
+																"z": 0
+															}
+														},
+														"properties": {
+															"name": "Stall",
+															"inputParams": [],
+															"outputParams": []
+														},
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"id": "e75b6bca-4885-44de-b74b-69c46dff7d20",
+										"activated": true,
+										"type": "condition",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTConditionNode.qml",
+											"position": {
+												"x": -39.209747314453125,
+												"y": 115.0634536743164,
+												"z": 0
+											}
+										},
+										"properties": {
+											"op1": {
+												"value": "time",
+												"type": "globalKnowledge"
+											},
+											"op2": {
+												"value": "alert.time[1]",
+												"type": "entityKnowledge"
+											},
+											"op": ">="
+										},
+										"children": [
+											{
+												"id": "8642a821-2397-4bf9-bb0f-954d99e33b04",
+												"activated": true,
+												"type": "sequence",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSequenceNode.qml",
+													"position": {
+														"x": 1.450055480003357,
+														"y": 383.1835021972656,
+														"z": 0
+													}
+												},
+												"properties": {},
+												"children": [
+													{
+														"id": "078bc1ca-628f-4758-be1f-e59d35cc5ebe",
+														"activated": true,
+														"type": "until",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTUntilNode.qml"
+														},
+														"properties": {
+															"op1": {
+																"value": "left",
+																"type": "entityKnowledge"
+															},
+															"op2": {
+																"value": "true",
+																"type": "boolean"
+															},
+															"op": "=="
+														},
+														"children": [
+															{
+																"id": "631c52d5-4015-4624-a2f5-45a9c303b720",
+																"activated": true,
+																"type": "priority",
+																"metadata": {
+																	"label": "",
+																	"itemTemplate": "BTSelectorPrio.qml"
+																},
+																"properties": {
+																	"active": "true"
+																},
+																"children": [
+																	{
+																		"id": "27ef552e-95dc-4978-96d7-01fbe1b14755",
+																		"activated": true,
+																		"type": "condition",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTConditionNode.qml"
+																		},
+																		"properties": {
+																			"op1": {
+																				"value": "alert.snooze.1",
+																				"type": "entityKnowledge"
+																			},
+																			"op2": {
+																				"value": "false",
+																				"type": "boolean"
+																			},
+																			"op": "=="
+																		},
+																		"children": [
+																			{
+																				"id": "555f6a02-d159-461b-8495-95b86bfe335d",
+																				"activated": true,
+																				"type": "sequence",
+																				"metadata": {
+																					"label": "",
+																					"itemTemplate": "BTSequenceNode.qml"
+																				},
+																				"properties": {},
+																				"children": [
+																					{
+																						"id": "565419fd-2a3e-41ca-b49f-ef97920090f9",
+																						"activated": true,
+																						"type": "action",
+																						"metadata": {
+																							"label": "Go Go Go",
+																							"itemTemplate": "BTActionNode.qml",
+																							"position": {
+																								"x": 82.36000061035156,
+																								"y": 120.69999694824219,
+																								"z": 0
+																							}
+																						},
+																						"properties": {
+																							"name": "Alert",
+																							"inputParams": [
+																								{
+																									"key": "sound",
+																									"value": "sncf.wav",
+																									"type": "string"
+																								},
+																								{
+																									"key": "message",
+																									"value": "It's time to go.",
+																									"type": "string"
+																								}
+																							],
+																							"outputParams": []
+																						},
+																						"children": []
+																					},
+																					{
+																						"id": "d5793c6f-f92e-4e07-8bb3-90ccdda9b298",
+																						"activated": true,
+																						"type": "action",
+																						"metadata": {
+																							"label": "",
+																							"itemTemplate": "BTActionNode.qml"
+																						},
+																						"properties": {
+																							"name": "Stall",
+																							"inputParams": [],
+																							"outputParams": []
+																						},
+																						"children": []
+																					}
+																				]
+																			}
+																		]
+																	},
+																	{
+																		"id": "ff0247e7-20c5-438c-b120-66e2974e3f2c",
+																		"activated": true,
+																		"type": "sequence",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTSequenceNode.qml"
+																		},
+																		"properties": {},
+																		"children": [
+																			{
+																				"id": "61f614f3-83d2-42b2-a3aa-93facc2aa32e",
+																				"activated": true,
+																				"type": "action",
+																				"metadata": {
+																					"label": "snooze",
+																					"itemTemplate": "BTActionNode.qml"
+																				},
+																				"properties": {
+																					"name": "Wait",
+																					"inputParams": [
+																						{
+																							"key": "time",
+																							"value": "60",
+																							"type": "real"
+																						}
+																					],
+																					"outputParams": []
+																				},
+																				"children": []
+																			},
+																			{
+																				"id": "204c9aff-d07e-4130-82ea-1343b790d52e",
+																				"activated": true,
+																				"type": "set",
+																				"metadata": {
+																					"label": "",
+																					"itemTemplate": "BTSetNode.qml"
+																				},
+																				"properties": {
+																					"destination": "alert.snooze.1",
+																					"op": {
+																						"value": "false",
+																						"type": "boolean"
+																					}
+																				},
+																				"children": []
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													},
+													{
+														"id": "17d66a41-9011-4b1d-964c-67f4fa55a3d2",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTActionNode.qml",
+															"position": {
+																"x": 82.36000061035156,
+																"y": 120.69999694824219,
+																"z": 0
+															}
+														},
+														"properties": {
+															"name": "Stall",
+															"inputParams": [],
+															"outputParams": []
+														},
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"id": "71a81d72-57a0-4a7d-97af-874b18712201",
+										"activated": true,
+										"type": "condition",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTConditionNode.qml",
+											"position": {
+												"x": 96.50595092773438,
+												"y": 116.28611755371094,
+												"z": 0
+											}
+										},
+										"properties": {
+											"op1": {
+												"value": "time",
+												"type": "globalKnowledge"
+											},
+											"op2": {
+												"value": "alert.time[0]",
+												"type": "entityKnowledge"
+											},
+											"op": ">="
+										},
+										"children": [
+											{
+												"id": "9504369f-08a1-4125-9486-3889bff1f113",
+												"activated": true,
+												"type": "sequence",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSequenceNode.qml",
+													"position": {
+														"x": 13.714509010314941,
+														"y": 156.70091247558594,
+														"z": 0
+													}
+												},
+												"properties": {},
+												"children": [
+													{
+														"id": "85ab7fd9-3ff1-4845-b9af-1a93623ba1b3",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "send map",
+															"itemTemplate": "BTActionNode.qml"
+														},
+														"properties": {
+															"name": "SendEmail",
+															"inputParams": [
+																{
+																	"key": "message",
+																	"value": "message",
+																	"type": "entityKnowledge"
+																},
+																{
+																	"key": "sender",
+																	"value": "nextEvent.organizer.email",
+																	"type": "entityKnowledge"
+																},
+																{
+																	"key": "subject",
+																	"value": "nextEvent.summary",
+																	"type": "entityKnowledge"
+																}
+															],
+															"outputParams": []
+														},
+														"children": []
+													},
+													{
+														"id": "d2a9c823-f9c9-4845-a2ff-06f50364a30f",
+														"activated": true,
+														"type": "until",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTUntilNode.qml"
+														},
+														"properties": {
+															"op1": {
+																"value": "awake",
+																"type": "entityKnowledge"
+															},
+															"op2": {
+																"value": "true",
+																"type": "boolean"
+															},
+															"op": "=="
+														},
+														"children": [
+															{
+																"id": "a0ee4649-3acf-40b3-8c8d-5ea1b3efa824",
+																"activated": true,
+																"type": "priority",
+																"metadata": {
+																	"label": "",
+																	"itemTemplate": "BTSelectorPrio.qml"
+																},
+																"properties": {
+																	"active": "true"
+																},
+																"children": [
+																	{
+																		"id": "e855f47a-2c8e-438e-b7b8-2064328dd2f5",
+																		"activated": true,
+																		"type": "condition",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTConditionNode.qml"
+																		},
+																		"properties": {
+																			"op1": {
+																				"value": "alert.snooze.0",
+																				"type": "entityKnowledge"
+																			},
+																			"op2": {
+																				"value": "false",
+																				"type": "boolean"
+																			},
+																			"op": "=="
+																		},
+																		"children": [
+																			{
+																				"id": "486ab912-1c50-41e4-b57d-3bfa8e501334",
+																				"activated": true,
+																				"type": "sequence",
+																				"metadata": {
+																					"label": "",
+																					"itemTemplate": "BTSequenceNode.qml"
+																				},
+																				"properties": {},
+																				"children": [
+																					{
+																						"id": "56542fd-2a3e-51ca-b49f-ae97931590f9",
+																						"activated": true,
+																						"type": "action",
+																						"metadata": {
+																							"label": "WakeUp",
+																							"itemTemplate": "BTActionNode.qml",
+																							"position": {
+																								"x": 82.36000061035156,
+																								"y": 120.69999694824219,
+																								"z": 0
+																							}
+																						},
+																						"properties": {
+																							"name": "Alert",
+																							"inputParams": [
+																								{
+																									"key": "sound",
+																									"value": "alarm.wav",
+																									"type": "string"
+																								},
+																								{
+																									"key": "message",
+																									"value": "You have to wake up, you have a meeting.",
+																									"type": "string"
+																								},
+																								{
+																									"key": "loop",
+																									"value": "true",
+																									"type": "boolean"
+																								}
+																							],
+																							"outputParams": []
+																						},
+																						"children": []
+																					},
+																					{
+																						"id": "312cb0c0-3968-4283-98b5-3f3949e86f76",
+																						"activated": true,
+																						"type": "action",
+																						"metadata": {
+																							"label": "",
+																							"itemTemplate": "BTActionNode.qml"
+																						},
+																						"properties": {
+																							"name": "Stall",
+																							"inputParams": [],
+																							"outputParams": []
+																						},
+																						"children": []
+																					}
+																				]
+																			}
+																		]
+																	},
+																	{
+																		"id": "1ac114f1-613c-4372-a9ef-91d386a1f9d8",
+																		"activated": true,
+																		"type": "sequence",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTSequenceNode.qml"
+																		},
+																		"properties": {},
+																		"children": [
+																			{
+																				"id": "fecf35ea-3fa7-449d-bdcf-2a82cf1a8d8a",
+																				"activated": true,
+																				"type": "action",
+																				"metadata": {
+																					"label": "snooze",
+																					"itemTemplate": "BTActionNode.qml"
+																				},
+																				"properties": {
+																					"name": "Wait",
+																					"inputParams": [
+																						{
+																							"key": "time",
+																							"value": "100",
+																							"type": "real"
+																						}
+																					],
+																					"outputParams": []
+																				},
+																				"children": []
+																			},
+																			{
+																				"id": "cb654dad-14ca-462c-8eb2-fe739f2d3074",
+																				"activated": true,
+																				"type": "set",
+																				"metadata": {
+																					"label": "",
+																					"itemTemplate": "BTSetNode.qml"
+																				},
+																				"properties": {
+																					"destination": "alert.snooze.0",
+																					"op": {
+																						"value": "false",
+																						"type": "boolean"
+																					}
+																				},
+																				"children": []
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													},
+													{
+														"id": "16a08dc4-71ec-4089-9c29-170f0e300de8",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTActionNode.qml",
+															"position": {
+																"x": 82.36000061035156,
+																"y": 124.95999908447266,
+																"z": 0
+															}
+														},
+														"properties": {
+															"name": "Stall",
+															"inputParams": [],
+															"outputParams": []
+														},
+														"children": []
+													}
+												]
+											}
+										]
+									},
+									{
+										"id": "b3493286-c86b-475b-a808-f9a13256914b",
+										"activated": true,
+										"type": "condition",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTConditionNode.qml",
+											"position": {
+												"x": 227.33099365234375,
+												"y": 121.17677307128906,
+												"z": 0
+											}
+										},
+										"properties": {
+											"op1": {
+												"value": "true",
+												"type": "boolean"
+											},
+											"op2": {
+												"value": "true",
+												"type": "boolean"
+											},
+											"op": "=="
+										},
+										"children": []
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

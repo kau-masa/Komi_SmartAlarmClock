@@ -1,0 +1,122 @@
+[
+	{
+		"version": "1.0.0"
+	},
+	{
+		"uuid": "7749ad7c-6a73-4503-aefe-9e9342b4fd14",
+		"name": "InitGoogleServices",
+		"description": "",
+		"children": [
+			{
+				"id": "82a88a29-9123-47dc-b068-ecc164f08be3",
+				"activated": true,
+				"type": "sequence",
+				"metadata": {
+					"label": "",
+					"itemTemplate": "BTSequenceNode.qml",
+					"position": {
+						"x": 5357.5,
+						"y": 2796.5,
+						"z": 0
+					}
+				},
+				"properties": {},
+				"children": [
+					{
+						"id": "729a65aa-2ba9-4fb9-a367-9b01602daf3d",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "Userinfo",
+							"itemTemplate": "BTActionNode.qml",
+							"position": {
+								"x": -178.31980122398636,
+								"y": 120.54010576987639,
+								"z": 0
+							}
+						},
+						"properties": {
+							"name": "AddGoogleService",
+							"inputParams": [
+								{
+									"key": "serviceName",
+									"value": "oauth2",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "v2",
+									"type": "string"
+								}
+							],
+							"outputParams": []
+						},
+						"children": []
+					},
+					{
+						"id": "e3b2e56e-29e7-4ba0-b601-b34086cde047",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "Gmail",
+							"itemTemplate": "BTActionNode.qml",
+							"position": {
+								"x": -63.31980122398636,
+								"y": 121.54010576987639,
+								"z": 0
+							}
+						},
+						"properties": {
+							"name": "AddGoogleService",
+							"inputParams": [
+								{
+									"key": "serviceName",
+									"value": "gmail",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "v1",
+									"type": "string"
+								}
+							],
+							"outputParams": []
+						},
+						"children": []
+					},
+					{
+						"id": "d510369d-0351-4afe-ab06-c71c65dc1814",
+						"activated": true,
+						"type": "action",
+						"metadata": {
+							"label": "Calendar",
+							"itemTemplate": "BTActionNode.qml",
+							"position": {
+								"x": 50.18019877601364,
+								"y": 121.04010576987639,
+								"z": 0
+							}
+						},
+						"properties": {
+							"name": "AddGoogleService",
+							"inputParams": [
+								{
+									"key": "serviceName",
+									"value": "calendar",
+									"type": "string"
+								},
+								{
+									"key": "version",
+									"value": "v3",
+									"type": "string"
+								}
+							],
+							"outputParams": []
+						},
+						"children": []
+					}
+				]
+			}
+		]
+	}
+]

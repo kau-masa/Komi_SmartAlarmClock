@@ -1,0 +1,12 @@
+apns==2.0.1
+pyglet==1.2.2
+python-dateutil==2.4.2
+gevent==1.0.1
+gevent-websocket==0.9.3
+grequests==0.2.0
+requests==2.4.3
+urllib3==1.10.1
+httplib2==0.9.1
+Bottle==0.12.7
+google-api-python-client==1.3.1
+jinja2==2.7.3

@@ -1,0 +1,617 @@
+[
+	{
+		"version": "1.0.0"
+	},
+	{
+		"uuid": "80d4219d-7290-4bd5-a7a7-b1904d9733bd",
+		"name": "MainUpdate",
+		"description": "",
+		"children": [
+			{
+				"id": "798f1b6f-674c-44c1-a942-d0e3d5019fdc",
+				"activated": true,
+				"type": "parallel",
+				"metadata": {
+					"label": "",
+					"itemTemplate": "BTParallelNode.qml"
+				},
+				"properties": {
+					"statusCondition": "failsIfAnyFails",
+					"retryPolicy": "propagateToAll"
+				},
+				"children": [
+					{
+						"id": "427601b3-02ed-4221-894f-e531e73ea278",
+						"activated": true,
+						"type": "until",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTUntilNode.qml"
+						},
+						"properties": {
+							"op1": {
+								"value": "true",
+								"type": "boolean"
+							},
+							"op2": {
+								"value": "false",
+								"type": "boolean"
+							},
+							"op": "=="
+						},
+						"children": [
+							{
+								"id": "51fe8c29-beff-4e22-87c4-4651c41d47f7",
+								"activated": true,
+								"type": "sequence",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTSequenceNode.qml"
+								},
+								"properties": {},
+								"children": [
+									{
+										"id": "46b56830-0c99-4533-9b35-23b2c4e70142",
+										"activated": true,
+										"type": "priority",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTSelectorPrio.qml"
+										},
+										"properties": {
+											"active": "false"
+										},
+										"children": [
+											{
+												"id": "23f5a584-9d97-40ac-bcac-ae0658956a87",
+												"activated": true,
+												"type": "sequence",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSequenceNode.qml"
+												},
+												"properties": {},
+												"children": [
+													{
+														"id": "1b8173ee-3d41-41f7-9469-721a0a2bfe99",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTActionNode.qml"
+														},
+														"properties": {
+															"name": "GetNextEvent",
+															"inputParams": [
+																{
+																	"key": "calendarId",
+																	"value": "primary",
+																	"type": "string"
+																},
+																{
+																	"key": "startingTime",
+																	"value": "time",
+																	"type": "globalKnowledge"
+																},
+																{
+																	"key": "timeZone",
+																	"value": "tz",
+																	"type": "globalKnowledge"
+																}
+															],
+															"outputParams": [
+																{
+																	"key": "destination",
+																	"value": "resultEvent",
+																	"type": "entityKnowledge"
+																}
+															]
+														},
+														"children": []
+													},
+													{
+														"id": "9f7b1897-335c-4656-847b-e69858fe0966",
+														"activated": true,
+														"type": "priority",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTSelectorPrio.qml"
+														},
+														"properties": {
+															"active": "false"
+														},
+														"children": [
+															{
+																"id": "85a197ec-a10e-42cc-b436-26337d66037e",
+																"activated": true,
+																"type": "condition",
+																"metadata": {
+																	"label": "",
+																	"itemTemplate": "BTConditionNode.qml"
+																},
+																"properties": {
+																	"op1": {
+																		"value": "nextEvent.id",
+																		"type": "entityKnowledge"
+																	},
+																	"op2": {
+																		"value": "resultEvent.id",
+																		"type": "entityKnowledge"
+																	},
+																	"op": "=="
+																},
+																"children": [
+																	{
+																		"id": "c0d0d0f8-f8d0-4fe6-b612-a93852a8f096",
+																		"activated": true,
+																		"type": "condition",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTConditionNode.qml"
+																		},
+																		"properties": {
+																			"op1": {
+																				"value": "nextEvent.start.dateTime",
+																				"type": "entityKnowledge"
+																			},
+																			"op2": {
+																				"value": "resultEvent.start.dateTime",
+																				"type": "entityKnowledge"
+																			},
+																			"op": "=="
+																		},
+																		"children": []
+																	}
+																]
+															},
+															{
+																"id": "c6ba0ef2-5fa0-40d6-9930-48b3e47b1de5",
+																"activated": true,
+																"type": "sequence",
+																"metadata": {
+																	"label": "",
+																	"itemTemplate": "BTSequenceNode.qml"
+																},
+																"properties": {},
+																"children": [
+																	{
+																		"id": "1a98988d-2bde-494b-9b01-ebed8bbfdf3f",
+																		"activated": true,
+																		"type": "set",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTSetNode.qml"
+																		},
+																		"properties": {
+																			"destination": "nextEvent",
+																			"op": {
+																				"value": "emptyEvent",
+																				"type": "entityKnowledge"
+																			}
+																		},
+																		"children": []
+																	},
+																	{
+																		"id": "bec43f06-b1d9-4f5b-973b-ea8a8ac15425",
+																		"activated": true,
+																		"type": "priority",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTSelectorPrio.qml"
+																		},
+																		"properties": {
+																			"active": "false"
+																		},
+																		"children": [
+																			{
+																				"id": "feb7687f-84d8-46ae-89a2-45148b1d7bae",
+																				"activated": true,
+																				"type": "condition",
+																				"metadata": {
+																					"label": "",
+																					"itemTemplate": "BTConditionNode.qml"
+																				},
+																				"properties": {
+																					"op1": {
+																						"value": "resultEvent.location",
+																						"type": "entityKnowledge"
+																					},
+																					"op2": {
+																						"value": "",
+																						"type": "string"
+																					},
+																					"op": "!="
+																				},
+																				"children": []
+																			},
+																			{
+																				"id": "ff045a71-bf0e-4322-b24b-1ddc81fc0fd7",
+																				"activated": true,
+																				"type": "action",
+																				"metadata": {
+																					"label": "",
+																					"itemTemplate": "BTActionNode.qml"
+																				},
+																				"properties": {
+																					"name": "UpdateEvent",
+																					"inputParams": [
+																						{
+																							"key": "calendarId",
+																							"value": "primary",
+																							"type": "string"
+																						},
+																						{
+																							"key": "eventId",
+																							"value": "resultEvent.id",
+																							"type": "entityKnowledge"
+																						},
+																						{
+																							"key": "property",
+																							"value": "location",
+																							"type": "string"
+																						},
+																						{
+																							"key": "value",
+																							"value": "workLocation",
+																							"type": "entityKnowledge"
+																						}
+																					],
+																					"outputParams": [
+																						{
+																							"key": "destination",
+																							"value": "resultEvent",
+																							"type": "entityKnowledge"
+																						}
+																					]
+																				},
+																				"children": []
+																			}
+																		]
+																	},
+																	{
+																		"id": "3ac34981-d2b2-444a-872b-eb021f215b53",
+																		"activated": true,
+																		"type": "set",
+																		"metadata": {
+																			"label": "",
+																			"itemTemplate": "BTSetNode.qml"
+																		},
+																		"properties": {
+																			"destination": "nextEvent",
+																			"op": {
+																				"value": "resultEvent",
+																				"type": "entityKnowledge"
+																			}
+																		},
+																		"children": []
+																	}
+																]
+															}
+														]
+													}
+												]
+											},
+											{
+												"id": "00bbe788-9af9-4ad3-be75-6e3be1b90b3b",
+												"activated": true,
+												"type": "set",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSetNode.qml"
+												},
+												"properties": {
+													"destination": "nextEvent",
+													"op": {
+														"value": "emptyEvent",
+														"type": "entityKnowledge"
+													}
+												},
+												"children": []
+											}
+										]
+									},
+									{
+										"id": "73f5a537-ebe5-41a4-959e-876725c24d26",
+										"activated": true,
+										"type": "action",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTActionNode.qml"
+										},
+										"properties": {
+											"name": "Wait",
+											"inputParams": [
+												{
+													"key": "time",
+													"value": "10",
+													"type": "integer"
+												}
+											],
+											"outputParams": []
+										},
+										"children": []
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "9d420ddc-e3ba-4e12-b656-c570757fee74",
+						"activated": true,
+						"type": "priority",
+						"metadata": {
+							"label": "",
+							"itemTemplate": "BTSelectorPrio.qml"
+						},
+						"properties": {
+							"active": "true"
+						},
+						"children": [
+							{
+								"id": "9d79dec2-ded6-46f4-8c22-fc25a3c530b8",
+								"activated": true,
+								"type": "condition",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTConditionNode.qml"
+								},
+								"properties": {
+									"op1": {
+										"value": "nextEvent.id",
+										"type": "entityKnowledge"
+									},
+									"op2": {
+										"value": "",
+										"type": "string"
+									},
+									"op": "=="
+								},
+								"children": [
+									{
+										"id": "4cbed7ce-32cc-4b0c-b82e-701eb70d9341",
+										"activated": true,
+										"type": "set",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTSetNode.qml"
+										},
+										"properties": {
+											"destination": "directions.found",
+											"op": {
+												"value": "false",
+												"type": "boolean"
+											}
+										},
+										"children": []
+									}
+								]
+							},
+							{
+								"id": "27a723b6-cee4-448e-b246-30cf4a3b0af8",
+								"activated": true,
+								"type": "condition",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTConditionNode.qml"
+								},
+								"properties": {
+									"op1": {
+										"value": "directions.found",
+										"type": "entityKnowledge"
+									},
+									"op2": {
+										"value": "true",
+										"type": "boolean"
+									},
+									"op": "=="
+								},
+								"children": [
+									{
+										"id": "0f9d5cbc-199f-4c61-b758-0f7a1f517c3a",
+										"activated": true,
+										"type": "embedded",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTEmbeddedNode.qml",
+											"position": {
+												"x": 1.2783586503805964,
+												"y": 153.40303804570976,
+												"z": 0
+											}
+										},
+										"properties": {
+											"behavior": {
+												"value": "AlertManager",
+												"type": "string"
+											},
+											"inputParams": []
+										},
+										"children": []
+									}
+								]
+							},
+							{
+								"id": "c8b8d110-b023-4784-ba50-cb23c4e5e779",
+								"activated": true,
+								"type": "sequence",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTSequenceNode.qml"
+								},
+								"properties": {},
+								"children": [
+									{
+										"id": "a71ceb65-b41b-4f39-837d-50a0b6c87f6f",
+										"activated": true,
+										"type": "set",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTSetNode.qml"
+										},
+										"properties": {
+											"destination": "alert.set",
+											"op": {
+												"value": "false",
+												"type": "boolean"
+											}
+										},
+										"children": []
+									},
+									{
+										"id": "aa496514-4d18-4df2-8b0e-2df68c5505ec",
+										"activated": true,
+										"type": "priority",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTSelectorPrio.qml"
+										},
+										"properties": {
+											"active": "true"
+										},
+										"children": [
+											{
+												"id": "b073217d-66a6-4afd-aa80-ad89205522fc",
+												"activated": true,
+												"type": "sequence",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSequenceNode.qml"
+												},
+												"properties": {},
+												"children": [
+													{
+														"id": "e06d878d-74b8-4b4c-89ae-e1a31e0ddf9d",
+														"activated": true,
+														"type": "action",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTActionNode.qml",
+															"position": {
+																"x": -2.7252326011657715,
+																"y": 147.97341918945312,
+																"z": 0
+															}
+														},
+														"properties": {
+															"name": "GetDirections",
+															"inputParams": [
+																{
+																	"key": "arrivalTime",
+																	"value": "nextEvent.start.dateTime",
+																	"type": "entityKnowledge"
+																},
+																{
+																	"key": "destination",
+																	"value": "nextEvent.location",
+																	"type": "entityKnowledge"
+																},
+																{
+																	"key": "mode",
+																	"value": "transportationMode",
+																	"type": "entityKnowledge"
+																},
+																{
+																	"key": "origin",
+																	"value": "origin",
+																	"type": "entityKnowledge"
+																}
+															],
+															"outputParams": [
+																{
+																	"key": "directions",
+																	"value": "directions",
+																	"type": "entityKnowledge"
+																}
+															]
+														},
+														"children": []
+													},
+													{
+														"id": "a109a567-be0c-41d7-b60b-848b5e926a15",
+														"activated": true,
+														"type": "set",
+														"metadata": {
+															"label": "",
+															"itemTemplate": "BTSetNode.qml"
+														},
+														"properties": {
+															"destination": "directions.found",
+															"op": {
+																"value": "true",
+																"type": "boolean"
+															}
+														},
+														"children": []
+													}
+												]
+											},
+											{
+												"id": "1146e23a-9cb9-4f23-8d21-8014eb7d25ea",
+												"activated": true,
+												"type": "set",
+												"metadata": {
+													"label": "",
+													"itemTemplate": "BTSetNode.qml"
+												},
+												"properties": {
+													"destination": "directions.found",
+													"op": {
+														"value": "false",
+														"type": "boolean"
+													}
+												},
+												"children": []
+											}
+										]
+									},
+									{
+										"id": "175ea3e7-e2db-4628-9faf-304146f349d9",
+										"activated": true,
+										"type": "action",
+										"metadata": {
+											"label": "",
+											"itemTemplate": "BTActionNode.qml"
+										},
+										"properties": {
+											"name": "Wait",
+											"inputParams": [
+												{
+													"key": "time",
+													"value": "10",
+													"type": "integer"
+												}
+											],
+											"outputParams": []
+										},
+										"children": []
+									}
+								]
+							},
+							{
+								"id": "0c3db79a-2f44-4ea9-b720-9582ab26e114",
+								"activated": true,
+								"type": "condition",
+								"metadata": {
+									"label": "",
+									"itemTemplate": "BTConditionNode.qml"
+								},
+								"properties": {
+									"op1": {
+										"value": "true",
+										"type": "boolean"
+									},
+									"op2": {
+										"value": "true",
+										"type": "boolean"
+									},
+									"op": "=="
+								},
+								"children": []
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

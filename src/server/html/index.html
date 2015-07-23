@@ -1,0 +1,261 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset='utf-8' />
+<!-- Bootstrap -->
+
+<!doctype html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/styles.css" media="screen">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<!-- fullcalendar-2.3.1 -->
+<link href='../static/fullcalendar/fullcalendar.css' rel='stylesheet' />
+<script src='../static/fullcalendar/lib/moment.min.js'></script>
+<script src='../static/fullcalendar/lib/jquery.min.js'></script>
+<script src='../static/fullcalendar/fullcalendar.min.js'></script>
+<script src='../static/fullcalendar/gcal.js'></script>
+<script src='../static/jstz.min.js'></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	var date = new Date();
+	function postToApp(route, jsonParam)
+	{
+		$.ajax({
+			type: "POST",
+			url: "{{url}}/" + route,
+			data: JSON.stringify(jsonParam),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function() {
+				console.log("update simulation SUCCESS");
+			},
+			failure: function(err) {
+				console.log(err);
+			}
+		});
+	}
+	function updateSimulation(type, item)
+	{
+		var jsonAnswer = {"type": type, "value": $(item).val()};
+		if( $(item).val() ) {
+			if( $(item).val() == "on") {
+				jsonAnswer["value"] = $(item).is(':checked');
+			}
+			if( type == "time") {
+				date.setTime(date.getTime() + 60000*($(item).val()-1))
+				if (date.getHours() == 23 && date.getMinutes() > 54) {
+  					$(item).attr("class", "btn btn-default btn-lg disabled"); 
+				}
+				jsonAnswer["value"] = $(item).val();
+				document.getElementById("time").stepUp($(item).val())
+				var timeline = $('#calendar').fullCalendar( 'clientEvents', 0 );
+				if( timeline[0] ) {
+					timeline[0]['start'] = date.getTime();
+					timeline[0]['end'] = date.setMinutes(date.getMinutes()+1);
+					$('#calendar').fullCalendar( 'updateEvent', timeline[0] );
+				}
+			}
+			postToApp("run", jsonAnswer);
+		}
+	};
+	function getLocation()
+	{
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(returnLoc);
+		}
+	};
+	function returnLoc(result)
+	{
+		var jsonAnswer = {"type": "location", "value": {"latitude": result.coords.latitude, "longitude": result.coords.longitude, "accuracy": result.coords.accuracy}};
+		postToApp("run", jsonAnswer);
+	};
+	function disable(item)
+	{
+  		$(item).attr("class", "btn btn-default btn-lg disabled"); 
+	}; 
+</script>
+<script>
+
+	$(document).ready(function() {
+		var d = new Date()
+		postToApp("", {'type': 'tz', 'value': jstz.determine().name()})
+		$('#calendar').fullCalendar({
+			timezone: 'local',
+			googleCalendarApiKey: "{{googleApiKey}}",
+			defaultView: "agendaDay",
+			header: false,
+			eventSources: [
+				{
+					events: [
+						{
+							id: 0,
+							title: 'now',
+							start: d.getTime(),
+							end: d.setMinutes(d.getMinutes()+1),
+							backgroundColor: 'red',
+							color: 'red',
+							overlap: false,
+							editable: false
+						},
+					],
+				},
+				{
+					googleCalendarId: "{{email}}",
+					textColor: '#FFFFFF',
+					borderColor: '#685AA3',
+					backgroundColor: '#42348C',
+					color: '#42348C',
+					editable: false,
+					overlap: false,
+					allDayDefault: false
+				}
+			],
+			allDaySlot: false,
+			scrollTime: d.toTimeString(d.setHours(d.getHours()-2)).split(" ")[0],
+			aspectRatio: 1.5,
+		});
+	});
+</script>
+<script type="text/javascript">
+	var wsUrl = "{{wsUrl}}"
+	if (wsUrl) {
+		var ws = new WebSocket("{{wsUrl}}/alert");
+		ws.onmessage = function (evt) {
+			if (evt.data != 'ping'){
+				var json_evt = JSON.parse(evt.data);
+				var msg = json_evt["message"] || "";
+				var sound = json_evt["song"] || "";
+				var loop = json_evt["loop"] || "False";
+				if (msg == "Hello!") {
+					$('#sleepcb').attr('checked', false);
+				}
+				else if (msg == "Goodbye!") {
+					$('#presencecb').attr('checked', false);
+				}
+				if (sound != '') {
+					var audio = new Audio("../static/sounds/" + sound);
+					if (msg != '') {
+						audio.onloadeddata = function() {
+							alert(msg);
+							audio.loop = false;
+							audio.pause();
+							var jsonAnswer = {"type": "snooze", "value": msg};
+							postToApp("run", jsonAnswer);
+						}
+					}
+					if (loop == "True") {
+						audio.loop = true
+					}
+					audio.play();
+				}
+				else if (msg != '') {
+					alert(msg);
+				}
+			}
+			ws.send("Done");
+		};
+		ws.onopen = function() {
+			var time = date.toTimeString().split(" ")[0]
+			document.getElementById("time").setAttribute("value", time);
+		}
+	}
+</script>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#loading {
+		display: none;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
+	#calendar {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+<div>
+	<div class="container col-md-4 col-md-offset-1 background-body-sac">
+		<div class="col-md-10 content-background">
+			<div class="page-header text-center">
+				<h3>Welcome to the</h3><h2>Smart Alarm Clock</h2><h3>application</h3>
+			</div>
+			<div class="form-content text-center">
+				{% if sim %}
+				<div class="form-group">
+					<label>Origin</label>
+					<div class="form-inline">
+						<input type="text" class="form-control input-lg" placeholder="Type in origin address" onChange="updateSimulation('origin', this)">
+						<br>or<br>
+						<button type="submit" class="btn btn-default btn-lg" onClick="getLocation()">find my current position <span class="glyphicon glyphicon-map-marker"></span></button>
+					</div>
+				</div><br>
+				<div class="form-inline">
+					<label>Favorite transportation mode</label>
+					<select class="form-control input-lg fit-to-background" onChange="updateSimulation('transpMode', this)">
+						<option value="transit">Public transportation</option>
+						<option value="driving">Driving</option>
+						<option value="walking">Walking</option>
+						<option value="bicycling">Bicycling</option>
+					</select>
+				</div>
+				{% endif %}
+			</div>
+			<div class="text-center">
+				{% if sim %}
+					<a class="btn btn-danger btn-lg" href="/stop" role="button" onclick="disable(this)">Stop Simulation</a>
+				{% elif auth %}
+					<a class="btn btn-primary btn-lg" href="/run" role="button" onclick="disable(this)">Start Simulation</a>
+				{% else %}
+					<a class="btn btn-info btn-lg" role="button" href={{auth_uri}} onclick="disable(this)">Log in Google</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% if sim %}
+	<div class="container col-md-6 col-md-offset-1 background-body-backoffice">
+		<div class="col-md-10 backoffice-background">
+			<div class="page-header text-center">
+				<h2>Smart Alarm Clock<br>Back Office</h2>
+			</div>
+			<div class="form-content text-center">
+				<div class="form-inline">
+					<label>Simulated time&nbsp;</label>
+						<input id="time" type="time" class="form-control input-lg" disabled>
+						<button type="submit" value="5" class="btn btn-default btn-lg" onclick="updateSimulation('time', this)">+5min</button>
+				</div><br>
+				<div class="form-inline">
+					<div class="input-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="sleepcb" data-size="lg" checked onclick="updateSimulation('awake', this)"> Still sleeping
+							</label>
+						</div><br>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="presencecb" data-size="lg" checked onclick="updateSimulation('presence', this)"> Still at home
+							</label>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div id='loading'>loading...</div>
+
+				<div id='calendar'></div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+</div>
