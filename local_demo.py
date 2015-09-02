@@ -6,7 +6,7 @@ import subprocess
 import time
 
 def userInput(config):
-	def defaultValue(config, key):
+	def defaultValue(config, key): 
 		return config[key] if key in config else ""
 	res = {}
 	invalid = {}
@@ -26,7 +26,7 @@ def userInput(config):
 		res = userInput(config)
 	return res
 
-config_file = open('config.json', 'r')
+config_file = open('config.json', 'r')    
 config = json.load(config_file)
 invalid_properties = [k for k, v in config.items() if v == ""]
 print "current configuration:", json.dumps(config, indent=2)
@@ -39,7 +39,7 @@ if 'user_name' and 'project_name' and 'project_branch' and 'google_client_id' an
 	reply = str(raw_input('config file complete. do you wish to reset it? (y/n): ')).lower().strip()
 	if reply[0] == 'y':
 		config = userInput(config)
-else:
+else: 
 	config = userInput(config)
 
 

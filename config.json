@@ -1,4 +1,10 @@
 {
-  "project_name": "SmartAlarmClock",
-  "project_branch": "master"
+  "google_api_key": "AIzaSyAYQEd2b3po1_jkYCwy22qAphCma6cPWjU", 
+  "project_name": "Komi_SmartAlarmClock", 
+  "project_branch": "master", 
+  "sac_app_secret": "ipYyzOaTwIF9dvKpGiwxDH8OaPMIQuQ4WGVICUZy", 
+  "google_client_secret": "0t6rblsNviBKZqGp0_kplfCM", 
+  "sac_app_id": "5iN3cxeqRVsyAuAIGEKu", 
+  "user_name": "kau-masa", 
+  "google_client_id": "504033741556-oa3ne9tefj5go28pt9vl1pdai2t7ahl2.apps.googleusercontent.com"
 }
